@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+//main 文件的基础语法
 
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -36,9 +37,17 @@ class HomeContent extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Text(
-        '你好 flutter '
+    return Center(
+     child: Text(
+       "这是一个标题11",
+       textDirection: TextDirection.ltr,
+       style: TextStyle(
+         color: Colors.yellow,
+         fontSize: 40.0,
+       ) ,
+     ),  
     );
   }
 }
+
 
