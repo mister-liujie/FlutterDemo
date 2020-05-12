@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'res/listData.dart';
 
-//main  弹性布局 类似小程序的 flex 
+//stack 布局 层叠布局  
 
 void main() => runApp(MyApp());
 
@@ -37,59 +37,82 @@ class MyApp extends StatelessWidget {
 // https://www.itying.com/images/flutter/1.png
 
 
-class IconContainer extends StatelessWidget{
-  
-  double size = 32.0;
-  Color color = Colors.red;
-  IconData icon;
-
-  //默认的构造函数  第一个参数是必选  后面两个是可选的参数
-  IconContainer(this.icon,{this.color,this.size});
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      height: 100.0,
-      width: 100.0,
-      color: this.color,
-     // child: Column(
-      child: Center(
-          child:Icon(this.icon,size: this.size,color: Colors.white),
-      ),
-    );
-  }
-}
-
 class LayoutDemo extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // 只有一个 自定义视图的时候
     // return IconContainer(Icons.search,color: Colors.blue,);
-   
-   //一个固定大小 另外一个弹性布局
-   return Row(
-    children: <Widget>[
-      Expanded(
-        flex: 1,
-        child: IconContainer(Icons.search,color: Colors.blue),
+  
+   return Center(
+     
+    child: Container(
+      width: 500.0,
+      height: 600.0,
+      color: Colors.cyan,
+       child: Stack(
+          // alignment: Alignment.bottomCenter,
+          alignment: Alignment.topLeft,
+          children: <Widget>[
+            
+              Image.network('https://www.itying.com/images/flutter/1.png'),
+              Text(
+                  '这是一个标题',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
+          ],
+        ),
       ),
-      IconContainer(Icons.home,color: Colors.orange),
-    ],
-   );
+    );
+
+  
+
+
+
+   //这种方式 图片在顶部  
+  //  return Container(
+  //   //  padding: EdgeInsets.all(10),
+  //    child: Stack(
+  //      alignment: Alignment.bottomCenter,
+  //      children: <Widget>[
+  //          Image.network('https://www.itying.com/images/flutter/1.png'),
+  //          Text(
+  //             '这是一个标题',
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(
+  //               color: Colors.white
+  //             ),
+  //           ),
+  //      ],
+  //    ),
+  //  );
+
+  //这种方法 图片再底部
+  //  return Container(
+  //    padding: EdgeInsets.all(10),
+  //    child: Stack(
+  //      alignment: Alignment.topCenter,
+  //      children: <Widget>[
+  //        Align(
+  //          alignment: Alignment.topCenter,
+  //          child: Image.network('https://www.itying.com/images/flutter/1.png'),
+  //        ),
+  //        Align(
+  //          alignment: Alignment.bottomCenter,
+  //          child: Text(
+  //             '这是一个标题',
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(
+  //               color: Colors.black
+  //             ),
+  //           ),
+  //        ),
+  //      ],
+  //    ),
+  //  );
    
-   //两个弹框 弹性布局
-    // return Row(
-    //   children: <Widget>[
-    //     Expanded(
-    //       flex: 1,
-    //       child: IconContainer(Icons.search,color: Colors.blue),
-    //     ),
-    //     Expanded(
-    //       flex: 2,
-    //       child: IconContainer(Icons.search,color: Colors.cyan)
-    //       ),
-    //   ],
-    // );
+  
   }
 }
-
