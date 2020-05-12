@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'res/listData.dart';
 
-//stack 布局 层叠布局  配和 align 定位子元素 位置
-
-
+//stack 布局 层叠布局   配合 position 定位子元素位置
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -26,7 +24,6 @@ class MyApp extends StatelessWidget {
         ),
         //显示内容
         body: LayoutDemo(),
-
       ),
       theme: ThemeData(
         primarySwatch: Colors.blue
@@ -38,28 +35,6 @@ class MyApp extends StatelessWidget {
 // https://www.itying.com/images/flutter/1.png
 
 
-
-class IconContainer extends StatelessWidget{
-  
-  double size = 32.0;
-  Color color = Colors.red;
-  IconData icon;
-  //默认的构造函数  第一个参数是必选  后面两个是可选的参数
-  IconContainer(this.icon,{this.color,this.size});
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      height: 100.0,
-      width: 100.0,
-      color: this.color,
-     // child: Column(
-      child: Center(
-          child:Icon(this.icon,size: this.size,color: Colors.white),
-      ),
-    );
-  }
-}
 
 class LayoutDemo extends StatelessWidget{
   @override
@@ -84,22 +59,6 @@ class LayoutDemo extends StatelessWidget{
   //    ),
   //  );
      
-     //这样的话 看不到 text
-  //    return Center(
-  //    child: Stack(
-  //      alignment: Alignment.center,
-  //      children: <Widget>[
-  //       Text('我是一个文本'),
-  //        Container(
-  //          height: 400.0,
-  //          width: 300.0,
-  //          color: Colors.red,
-  //        ),
-        
-  //      ], 
-  //    ),
-  //  );
-   
 
     return Center(
        
@@ -107,45 +66,27 @@ class LayoutDemo extends StatelessWidget{
          height: 400.0,
          width: 300.0,
          color: Colors.red,
-         
 
-        
-        
-         //这样显示 所有的 子控件都重叠在了一起  都以alignment 的属性为准
-        //  child: Stack(
-        //    alignment: Alignment.center,
-        //    children: <Widget>[
-        //      Icon(Icons.search,size: 80,color: Colors.cyan,),
-        //      Icon(Icons.settings,size: 60,color: Colors.blue,),
-        //      Icon(Icons.home,size: 40,color: Colors.white,)
-        //    ],
-        //  ), 
-
-        //stack 配合  align 一起定位 子元素的位置和显示的方式 
+        //stack 配合  Positioned 一起定位 子元素的位置和显示的方式 
          child: Stack(
            children: <Widget>[
-            Align(
-               
-               //alignment 可以有两种显示方式 第一种设置 top left 第二种设置x y 坐标 中心点坐标为 0 0
-              // alignment: Alignment.topLeft,
-              alignment: Alignment(-1, -0.5),
+            Positioned(
+              // top: 10,
+              left: 10, 
+              child:Icon(Icons.settings,size: 40,color: Colors.green,),
+            ),
+             Positioned(
+               bottom: 0,
+              left: 100,
               child:Icon(Icons.search,size: 40,color: Colors.cyan,),
             ),
-             Align(
-              alignment: Alignment.center,
-              child:Icon(Icons.search,size: 40,color: Colors.cyan,),
-            ),
-             Align(
-              alignment: Alignment.bottomRight,
-              child:Icon(Icons.search,size: 40,color: Colors.cyan,),
+             Positioned(
+              bottom: 0,
+              child:Icon(Icons.home,size: 40,color: Colors.blue,),
             ),
            ],
          ),
-
        ),
-
     );
-
-  
   }
 }
