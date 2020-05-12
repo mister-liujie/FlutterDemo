@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'res/listData.dart';
 
-//stack 布局 层叠布局   配合 position 定位子元素位置
+//aspectRatio  设置子视图的宽高比
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -40,53 +40,26 @@ class LayoutDemo extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // 只有一个 自定义视图的时候
-    // return IconContainer(Icons.search,color: Colors.blue,);
-   
-  //  return Center(
-  //    child: Stack(
-  //      alignment: Alignment.center,
-  //      children: <Widget>[
-  //        Container(
-  //          height: 400.0,
-  //          width: 300.0,
-  //          color: Colors.red,
-  //        ),
-  //        Text('我是一个文本',style: TextStyle(
-  //          fontSize: 40,
-  //          color: Colors.white,
-  //        ),),
-  //      ], 
-  //    ),
-  //  );
-     
-
-    return Center(
-       
-       child: Container(
-         height: 400.0,
-         width: 300.0,
-         color: Colors.red,
-
-        //stack 配合  Positioned 一起定位 子元素的位置和显示的方式 
-         child: Stack(
-           children: <Widget>[
-            Positioned(
-              // top: 10,
-              left: 10, 
-              child:Icon(Icons.settings,size: 40,color: Colors.green,),
-            ),
-             Positioned(
-               bottom: 0,
-              left: 100,
-              child:Icon(Icons.search,size: 40,color: Colors.cyan,),
-            ),
-             Positioned(
-              bottom: 0,
-              child:Icon(Icons.home,size: 40,color: Colors.blue,),
-            ),
-           ],
-         ),
-       ),
+  
+    //设置子视图的宽高比
+    // return  Container(
+    //     //  height: 400.0,
+    //      width: 300.0,
+    //      child: AspectRatio(
+    //       aspectRatio: 2.0/1.0,
+    //       child: Container(
+    //         color: Colors.blue,
+    //       ),
+    //     ),
+    // );
+    
+    //如果不设置宽度 则默认以 屏幕的宽度为宽
+    return AspectRatio(
+      aspectRatio: 2.0/1.0,
+      child: Container(
+        color:Colors.cyan
+      ),
     );
+    
   }
 }
