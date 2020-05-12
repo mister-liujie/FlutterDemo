@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           )
         ),
         //显示内容
-        body: HomeContent(),
+        body: LayoutDemo(),
 
       ),
       theme: ThemeData(
@@ -36,125 +36,49 @@ class MyApp extends StatelessWidget {
 
 // https://www.itying.com/images/flutter/1.png
 
-//
-class HomeContent extends StatelessWidget{
+class IconContainer extends StatelessWidget{
   
-  //自定义的方法 
-  Widget _getListData1 (context,index){
-    return Container(
-        child: Column(
-          children: <Widget>[
-            Image.network(listData[index]['imageurl']),
-            SizedBox(height: 10),
-            Text(
-              listData[index]['title'],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            )
-          ],
-        ), 
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Color.fromRGBO(233, 26, 48, 0.9),
-            width: 1
-          )
-        ),
-    );
-  }
+  double size = 32.0;
+  Color color = Colors.red;
+  IconData icon;
 
-  List<Widget> _getListData(){
-    var tempList = listData.map((value){
-       return Container(
-          child: Column(
-              children: <Widget>[
-                Image.network(value['imageurl']),
-                SizedBox(height: 15),
-                Text(
-                  value['title'],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Color.fromRGBO(26, 78, 159, 1.0),
-                    backgroundColor: Colors.orange,
-                  ),
-                )
-              ],   
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.blue,
-              width: 1,
-            )
-          ),
-       );
-    });
-    return tempList.toList();
-  }
-
-  List<Widget> _getData(){
-   
-    List<Widget> list = new List();
-    for (var i = 0; i < 20; i++) {
-      list.add(
-        Container(
-          // alignment: Alignment.center,
-          alignment: Alignment.center,
-          child:Text(
-            '这是一个第$i个文本',
-            style: TextStyle(
-               color: Colors.red
-            ),
-          ),
-          color: Colors.blue,
-        )
-      );
-    } 
-    return list;
-  }
-  
+  //默认的构造函数  第一个参数是必选  后面两个是可选的参数
+  IconContainer(this.icon,{this.color,this.size});
   @override
   Widget build(BuildContext context) {
-   
-   //第一种创建的方式
-   return GridView.count(
-     //有几列
-     crossAxisCount: 2,
-    //  children: this._getData(), //子视图
-    //  children: this._getListData(),
-     children: <Widget>[
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
-       
-     ],
-     childAspectRatio: 1.7,
-     crossAxisSpacing: 10.0,
-     mainAxisSpacing: 10.0,
-     padding: EdgeInsets.all(10), //
-    //  childAspectRatio: 0.7, //宽高比
-   );
-   
-   //第二种创建 GridView 的方式
-  //   return GridView.builder(
-  //     padding: EdgeInsets.all(10.0),
-  //     itemCount: listData.length,
-  //     itemBuilder: this._getListData1,
-  //     //builder 创建的时候必须 设置代理
-  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //       crossAxisCount: 2,
-  //       crossAxisSpacing: 10.0,
-  //       mainAxisSpacing: 10.0,
-  //     ),
-  //  );
-
-
-  }  
-    
+    // TODO: implement build
+    return Container(
+      height: 100.0,
+      width: 100.0,
+      color: this.color,
+     // child: Column(
+      child: Center(
+          child:Icon(this.icon,size: this.size,color: Colors.white),
+      ),
+    );
+  }
 }
 
- 
+class LayoutDemo extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // 只有一个 自定义视图的时候
+    // return IconContainer(Icons.search,color: Colors.blue,);
+    return Container(
+     height: 800.0,
+     width: 400.0,
+     color: Colors.pink,
+     child: Row(
+       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //  crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.end,
+       children: <Widget>[
+         IconContainer(Icons.home,color: Colors.blue),
+         IconContainer(Icons.search,color: Colors.orange),
+         IconContainer(Icons.select_all,color: Colors.yellow),
+       ],
+     ),
+    );
+
+  }
+}
