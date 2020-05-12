@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'res/listData.dart';
 
-//main 文件的基础语法
+//main  弹性布局 类似小程序的 flex 
 
 void main() => runApp(MyApp());
 
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
 
 // https://www.itying.com/images/flutter/1.png
 
+
 class IconContainer extends StatelessWidget{
   
   double size = 32.0;
@@ -64,21 +65,31 @@ class LayoutDemo extends StatelessWidget{
   Widget build(BuildContext context) {
     // 只有一个 自定义视图的时候
     // return IconContainer(Icons.search,color: Colors.blue,);
-    return Container(
-     height: 800.0,
-     width: 400.0,
-     color: Colors.pink,
-     child: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //  crossAxisAlignment: CrossAxisAlignment.stretch,
-        crossAxisAlignment: CrossAxisAlignment.end,
-       children: <Widget>[
-         IconContainer(Icons.home,color: Colors.blue),
-         IconContainer(Icons.search,color: Colors.orange),
-         IconContainer(Icons.select_all,color: Colors.yellow),
-       ],
-     ),
-    );
-
+   
+   //一个固定大小 另外一个弹性布局
+   return Row(
+    children: <Widget>[
+      Expanded(
+        flex: 1,
+        child: IconContainer(Icons.search,color: Colors.blue),
+      ),
+      IconContainer(Icons.home,color: Colors.orange),
+    ],
+   );
+   
+   //两个弹框 弹性布局
+    // return Row(
+    //   children: <Widget>[
+    //     Expanded(
+    //       flex: 1,
+    //       child: IconContainer(Icons.search,color: Colors.blue),
+    //     ),
+    //     Expanded(
+    //       flex: 2,
+    //       child: IconContainer(Icons.search,color: Colors.cyan)
+    //       ),
+    //   ],
+    // );
   }
 }
+
