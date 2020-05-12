@@ -39,191 +39,122 @@ class MyApp extends StatelessWidget {
 //
 class HomeContent extends StatelessWidget{
   
-  List list = new List();
-  HomeContent(){
-    for (var i = 0; i < 20; i++) {
-      // this.list.add(ListTile(
-      //     title:Text('这是一个第$i个文本'),
-      //   )
-      // );
-      this.list.add('这是一个第$i个文本');
-    }
-  }
-
-  Widget _getListData(context,index){
-
-    return ListTile(
-      title: Text(listData[index]['title']),
+  //自定义的方法 
+  Widget _getListData1 (context,index){
+    return Container(
+        child: Column(
+          children: <Widget>[
+            Image.network(listData[index]['imageurl']),
+            SizedBox(height: 10),
+            Text(
+              listData[index]['title'],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            )
+          ],
+        ), 
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Color.fromRGBO(233, 26, 48, 0.9),
+            width: 1
+          )
+        ),
     );
   }
 
-
-  List<Widget> _getData(){
+  List<Widget> _getListData(){
     var tempList = listData.map((value){
-       return ListTile(
-         title:Text(value['title']),
-         subtitle: Text(value['auther']),
-         leading: Image.network(value['imageurl']),
+       return Container(
+          child: Column(
+              children: <Widget>[
+                Image.network(value['imageurl']),
+                SizedBox(height: 15),
+                Text(
+                  value['title'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Color.fromRGBO(26, 78, 159, 1.0),
+                    backgroundColor: Colors.orange,
+                  ),
+                )
+              ],   
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.blue,
+              width: 1,
+            )
+          ),
        );
     });
     return tempList.toList();
+  }
 
-    // List<Widget> list = new List();
-    // for (var i = 0; i < 20; i++) {
-    //   list.add(
-    //     ListTile(
-    //       title:Text('这是一个第$i个文本')
-    //     )
-    //   );
-    // } 
-    // return list;
-
-    // return [
-    //   ListTile(
-    //     title: Text('我是一个标题'),
-    //   ),
-    //    ListTile(
-    //     title: Text('我是一个标题'),
-    //   ),
-    //    ListTile(
-    //     title: Text('我是一个标题'),
-    //   ), 
-    //   ListTile(
-    //     title: Text('我是一个标题'),
-    //   )
-    // ];
+  List<Widget> _getData(){
+   
+    List<Widget> list = new List();
+    for (var i = 0; i < 20; i++) {
+      list.add(
+        Container(
+          // alignment: Alignment.center,
+          alignment: Alignment.center,
+          child:Text(
+            '这是一个第$i个文本',
+            style: TextStyle(
+               color: Colors.red
+            ),
+          ),
+          color: Colors.blue,
+        )
+      );
+    } 
+    return list;
   }
   
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    // return Text(
-    //     '你好 flutter '
-    // );
    
-
-    return ListView.builder(
-          itemCount: listData.length,
-          //这个方法要注意 后面不带（）  是直接执行的意思
-          itemBuilder: this._getListData
-          /*
-          itemBuilder: (context,index){
-            // return this.list[index];
-            //  return ListTile(
-            //    title: Text(listData[index]["title"])
-            //  );
-            // return _getData()[index];
-          }
-          */
-    );
+   //第一种创建的方式
+   return GridView.count(
+     //有几列
+     crossAxisCount: 2,
+    //  children: this._getData(), //子视图
+    //  children: this._getListData(),
+     children: <Widget>[
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       Image.network('https://www.itying.com/images/flutter/1.png',fit: BoxFit.cover,),
+       
+     ],
+     childAspectRatio: 1.7,
+     crossAxisSpacing: 10.0,
+     mainAxisSpacing: 10.0,
+     padding: EdgeInsets.all(10), //
+    //  childAspectRatio: 0.7, //宽高比
+   );
    
-
-    // return ListView.builder(
-    //       itemCount: this.list.length,
-    //       itemBuilder: (context,index){
-    //         // return this.list[index];
-    //          return ListTile(
-    //            title: Text(this.list[index])
-    //          );
-    //       }
-    // );
-
-  //  return ListView(
-  //    children: this._getData()
+   //第二种创建 GridView 的方式
+  //   return GridView.builder(
+  //     padding: EdgeInsets.all(10.0),
+  //     itemCount: listData.length,
+  //     itemBuilder: this._getListData1,
+  //     //builder 创建的时候必须 设置代理
+  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //       crossAxisCount: 2,
+  //       crossAxisSpacing: 10.0,
+  //       mainAxisSpacing: 10.0,
+  //     ),
   //  );
 
 
-
-    /*
-    return Container(
-      height: 180.0,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Container(
-            width: 180.0,
-            color: Colors.red,
-          ),
-          Container(
-            width: 180.0,
-            color: Colors.orange,
-            child: ListView(
-              // children: <Widget>[]
-              children: <Widget>[
-                 Image.network('https://www.itying.com/images/flutter/1.png'),
-                 Text('我是一个文本')
-              ],
-            )
-          )
-        ],
-      ),
-    );
-    */
-
-    /*
-    return ListView(
-      padding: EdgeInsets.all(10),
-      children: <Widget>[
-        Container(
-          width: 180.0,
-          height: 180.0,
-          color: Colors.green,
-        ),
-        Container(
-          width: 180.0,
-          height: 180.0,
-          color: Colors.red,
-        ),
-        Container(
-          width: 180.0,
-          height: 180.0,
-          color: Colors.blue,
-        ),
-        Container(
-          width: 180.0,
-          height: 180.0,
-          color: Colors.orange,
-        ),
-        Container(
-          width: 180.0,
-          height: 180.0,
-          color: Colors.cyan,
-        ),
-
-      ], 
-      */
-
-      /*  带视图的列表
-      children: <Widget>[
-        Image.network('https://www.itying.com/images/flutter/1.png'),
-        Container(
-          child: Text(
-            '我是一个标题',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-          height: 40,
-          padding: EdgeInsets.fromLTRB(0 , 10, 0, 10),
-        ),
-
-        Image.network('https://www.itying.com/images/flutter/1.png'),
-        Container(
-          child: Text(
-            '我是一个标题',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-          height: 40,
-          padding: EdgeInsets.fromLTRB(0 , 10, 0, 10),
-        ),
-       
-      ],
-      */  
-  }
+  }  
+    
 }
 
  
